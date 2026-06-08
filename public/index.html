@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CMT Meeting - Classroom Video Conference</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <section class="panel">
+        <h1>CMT Meeting</h1>
+        <p class="lead">Admin can create meeting links. Students can join only.</p>
+
+        <div id="auth-status" class="result" hidden></div>
+
+        <form id="login-form" class="stack">
+          <label>
+            Admin email
+            <input name="email" type="email" required placeholder="admin@example.com" />
+          </label>
+
+          <label>
+            Admin password
+            <input name="password" type="password" required placeholder="Enter admin password" />
+          </label>
+
+          <button type="submit">Admin Login</button>
+        </form>
+
+        <button id="logout-btn" type="button" hidden>Logout</button>
+
+        <form id="create-form" class="stack" hidden>
+          <label>
+            Meeting title
+            <input name="title" required maxlength="255" placeholder="Live Market Class" />
+          </label>
+
+          <label>
+            Host name
+            <input name="hostName" required maxlength="120" placeholder="Coach Name" />
+          </label>
+
+          <label>
+            Host email (optional)
+            <input name="hostEmail" type="email" maxlength="190" placeholder="coach@example.com" />
+          </label>
+
+          <label>
+            Schedule (optional)
+            <input name="scheduledAt" type="datetime-local" />
+          </label>
+
+          <button type="submit">Create Meeting Link</button>
+        </form>
+
+        <div id="create-result" class="result" hidden></div>
+      </section>
+
+      <section class="panel">
+        <h2>Recent Meetings</h2>
+        <p class="lead">Click any room to open the meeting page.</p>
+        <ul id="meeting-list" class="meeting-list"></ul>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

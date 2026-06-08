@@ -1,0 +1,17 @@
+{
+  "name": "cmt-meeting",
+  "version": "1.0.0",
+  "description": "Self-host-ready classroom video meetings powered by Jitsi + MySQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
+  }
+}

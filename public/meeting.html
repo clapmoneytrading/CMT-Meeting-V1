@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CMT Meeting Room</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="brand-strip">
+      <div class="brand-logo" aria-label="Clap Money Trading logo">CMT</div>
+      <div class="brand-copy">
+        <strong>Clap Money Trading</strong>
+        <small>Official Classroom Meeting</small>
+      </div>
+    </header>
+
+    <header class="meeting-header">
+      <div>
+        <h1 id="meeting-title">Meeting Room</h1>
+        <p id="meeting-room" class="muted"></p>
+      </div>
+      <div class="header-actions">
+        <button id="copy-link">Copy Invite Link</button>
+        <button id="open-chat">Open Chat</button>
+        <button id="mute-all">Mute All Students</button>
+        <button id="start-record">Start Recording</button>
+      </div>
+    </header>
+
+    <section class="record-box">
+      <h3>Save Recording Link</h3>
+      <form id="recording-form" class="row">
+        <input id="recording-url" placeholder="Paste cloud recording URL" />
+        <input id="recording-notes" placeholder="Notes (optional)" />
+        <button type="submit">Save</button>
+      </form>
+      <small class="muted">If you self-host Jitsi with Jibri, recording can be started from the toolbar and linked here.</small>
+    </section>
+
+    <section id="public-jitsi-warning" class="public-warning" hidden>
+      <strong>Public meet.jit.si embedding has a 5-minute limit.</strong>
+      <p class="muted">Use direct join below to open full meeting without the embed restriction. For Google-based moderator auth, use your own Jitsi server or JaaS JWT setup.</p>
+      <button id="open-external" type="button">Open Full Meeting (No 5-Min Embed Limit)</button>
+    </section>
+
+    <div id="jitsi-container"></div>
+
+    <section class="panel recordings-panel">
+      <h3>Saved Recordings</h3>
+      <ul id="recordings" class="meeting-list"></ul>
+    </section>
+
+    <script src="/meeting.js"></script>
+  </body>
+</html>
