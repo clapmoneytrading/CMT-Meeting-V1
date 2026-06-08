@@ -20,6 +20,10 @@ const effectiveAdminPassword = adminPassword || defaultAdminPassword;
 
 let pool;
 
+// Render (and similar platforms) run Node behind a reverse proxy.
+// Trust first proxy so secure session cookies are correctly handled.
+app.set('trust proxy', 1);
+
 function requireAdmin(req, res, next) {
   if (!req.session || !req.session.isAdmin) {
     return res.status(401).json({ message: 'Admin login required' });
@@ -108,7 +112,7 @@ app.use(
     cookie: {
       httpOnly: true,
       sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production',
+      secure: 'auto',
       maxAge: 12 * 60 * 60 * 1000
     }
   })
