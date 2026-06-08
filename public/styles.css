@@ -23,6 +23,30 @@ body {
   color: var(--ink);
 }
 
+.home-brand {
+  max-width: 1200px;
+  margin: 18px auto 8px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.home-brand-logo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.home-brand-title {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.1vw, 2rem);
+  letter-spacing: 0.3px;
+}
+
 .layout {
   max-width: 1200px;
   margin: 24px auto;
@@ -208,6 +232,17 @@ button.small {
 }
 
 @media (max-width: 700px) {
+  .home-brand {
+    margin-top: 14px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .home-brand-logo {
+    width: 52px;
+    height: 52px;
+  }
+
   .brand-copy strong {
     font-size: 16px;
   }

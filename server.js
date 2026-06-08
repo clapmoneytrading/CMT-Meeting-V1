@@ -13,6 +13,10 @@ const jitsiDomain = process.env.JITSI_DOMAIN || 'meet.jit.si';
 const adminEmail = (process.env.ADMIN_EMAIL || '').trim().toLowerCase();
 const adminPassword = process.env.ADMIN_PASSWORD || '';
 const sessionSecret = process.env.SESSION_SECRET || 'change-this-session-secret';
+const defaultAdminEmail = 'admin@example.com';
+const defaultAdminPassword = 'change_me_strong_password';
+const effectiveAdminEmail = adminEmail || defaultAdminEmail;
+const effectiveAdminPassword = adminPassword || defaultAdminPassword;
 
 let pool;
 
@@ -130,19 +134,13 @@ app.post('/api/auth/login', (req, res) => {
   const email = String((req.body && req.body.email) || '').trim().toLowerCase();
   const password = String((req.body && req.body.password) || '');
 
-  if (!adminEmail || !adminPassword) {
-    return res.status(500).json({
-      message: 'Admin credentials are not configured. Set ADMIN_EMAIL and ADMIN_PASSWORD in .env.'
-    });
-  }
-
-  if (email !== adminEmail || password !== adminPassword) {
+  if (email !== effectiveAdminEmail || password !== effectiveAdminPassword) {
     return res.status(401).json({ message: 'Invalid email or password' });
   }
 
   req.session.isAdmin = true;
-  req.session.email = adminEmail;
-  res.json({ ok: true, isAdmin: true, email: adminEmail });
+  req.session.email = effectiveAdminEmail;
+  res.json({ ok: true, isAdmin: true, email: effectiveAdminEmail });
 });
 
 app.post('/api/auth/logout', (req, res) => {
@@ -348,6 +346,9 @@ async function start() {
     app.listen(port, () => {
       console.log(`CMT Meeting server running on ${appBaseUrl}`);
       console.log(`Jitsi domain: ${jitsiDomain}`);
+      if (!adminEmail || !adminPassword) {
+        console.warn('ADMIN_EMAIL or ADMIN_PASSWORD is not set. Using fallback defaults from .env.example.');
+      }
     });
   } catch (error) {
     console.error('Failed to start server:', error.message);
